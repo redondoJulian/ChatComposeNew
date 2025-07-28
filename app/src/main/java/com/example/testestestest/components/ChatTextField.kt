@@ -23,7 +23,7 @@ fun ChatTextField(
     valueTextField: String,
     onValueChange: (String) -> Unit,
     onSendMessage: () -> Unit
-    ){
+) {
     OutlinedTextField(
         value = valueTextField,
         onValueChange = { onValueChange(it) },
@@ -50,6 +50,6 @@ fun ChatTextField(
                 Icon(imageVector = Icons.AutoMirrored.Default.Send, contentDescription = "Send")
             }
         },
-        placeholder = {Text("Enter a message")}
+        placeholder = { Text("Enter a message") }
     )
 }
