@@ -1,34 +1,33 @@
 package com.example.testestestest.ui.theme
 
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Typography
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.example.testestestest.enums.Themes
+import com.example.testestestest.ui.theme.themes.original.darkSecondaryScheme
+import com.example.testestestest.ui.theme.themes.original.lightSecondaryScheme
+import com.example.testestestest.ui.theme.themes.original.original.darkOriginalScheme
+import com.example.testestestest.ui.theme.themes.original.original.lightOriginalScheme
 
-// Set of Material typography styles to start with
-val Typography = Typography(
-    bodyLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
+@Composable
+fun TestTheme(
+    themes: Themes,
+    darkMode: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
+) {
+
+    var colorScheme = when(themes){
+        Themes.ORIGINAL -> if (darkMode) darkOriginalScheme else lightOriginalScheme
+        Themes.SECONDARY -> if (darkMode) darkSecondaryScheme else lightSecondaryScheme
+    }
+
+    MaterialTheme(
+        colorScheme = colorScheme,
+        content = content
     )
-    /* Other default text styles to override
-    titleLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 22.sp,
-        lineHeight = 28.sp,
-        letterSpacing = 0.sp
-    ),
-    labelSmall = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Medium,
-        fontSize = 11.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.5.sp
-    )
-    */
-)
+}

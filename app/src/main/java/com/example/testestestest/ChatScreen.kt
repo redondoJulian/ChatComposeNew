@@ -40,6 +40,7 @@ import com.example.testestestest.components.ChatTextField
 import com.example.testestestest.components.ConteinerChatBox
 import com.example.testestestest.components.DrawerColorPicker
 import com.example.testestestest.components.DrawerColorPicker2
+import com.example.testestestest.enums.Themes
 import com.example.testestestest.models.MessageData
 import com.example.testestestest.utils.automationMessage
 import kotlinx.coroutines.delay
@@ -47,7 +48,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ChatScreen() {
+fun ChatScreen(onChangeTheme: (Themes) -> Unit) {
 
     var drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
@@ -68,25 +69,29 @@ fun ChatScreen() {
                     fontWeight = FontWeight.Bold
                 )
 
-                HorizontalDivider()
-
-                DrawerColorPicker(
-                    text = "Natural Theme",
-                    color = Color(0xFF8F4C38),
-                    drawerState,
-                    scope,
-                    onClick = {
-                        Log.d("TestDraw","DRAWER PICKER 1")
-                    }
-                )
-
-                HorizontalDivider()
+                HorizontalDivider(color = Color.LightGray)
 
                 DrawerColorPicker2(
-                    text = "Test 2",
-                    color = Color(0xFF000000),
+                    text = "Tema Original",
+                    color = Color(0xFFD6E3FF),
                     onClick = {
                         scope.launch {
+                            onChangeTheme(Themes.ORIGINAL)
+                            drawerState.close()
+                        }
+                        Log.d("TestDraw","DRAWER PICKER 2")
+                    },
+                    modifier = Modifier
+                )
+
+                HorizontalDivider(color = Color.Gray)
+
+                DrawerColorPicker2(
+                    text = "Tema Secundario",
+                    color = Color(0xFFFFDBD1),
+                    onClick = {
+                        scope.launch {
+                            onChangeTheme(Themes.SECONDARY)
                             drawerState.close()
                         }
                         Log.d("TestDraw","DRAWER PICKER 2")
